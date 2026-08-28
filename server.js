@@ -3,30 +3,12 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-let users = []; // in-memory DB for now
-let transactions = [];
-
-app.get('/api/healthz', (req, res) => {
-  res.json({ status: "ok" });
-});
+let users = [];
 
 app.post('/api/register', (req, res) => {
-  const { name, phone, pin } = req.body;
-  const newUser = { name, phone, pin, balance: 0 };
-  users.push(newUser);
-  res.json({ success: true, user: newUser });
-});
-
-app.post('/api/login', (req, res) => {
-  const { phone, pin } = req.body;
-  const user = users.find(u => u.phone === phone && u.pin === pin);
-  user ? res.json({ success: true, user }) : res.status(401).json({ error: "Invalid" });
-});
-
-app.get('/api/balance/:phone', (req, res) => {
-  const user = users.find(u => u.phone === req.params.phone);
-  res.json({ balance: user ? user.balance : 0 });
+  users.push(req.body);
+  res.json({ success: true });
 });
 
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`VeloPay API running on ${PORT}`));;
+app.listen(PORT);
