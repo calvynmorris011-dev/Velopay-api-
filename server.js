@@ -9,10 +9,15 @@ let transactions = [];
 app.get('/api/healthz', (req, res) => res.json({status: "ok"}));
 
 app.post('/api/register', (req, res) => {
-  const {name, phone, pin} = req.body;
-  users.push({name, phone, pin, balance: 100}); // give R100 to test
-  res.json({success: true, user: {name, phone, balance: 100}});
+  javascript
+app.post('/api/register', (req, res) => {
+  const { name, phone, pin } = req.body;
+  const newUser = { name, phone, pin, balance: 0 };
+  users.push(newUser);
+  res.json({ success: true, user: newUser });
 });
+  
+
 
 app.post('/api/login', (req, res) => {
   const {phone, pin} = req.body;
@@ -25,5 +30,6 @@ app.get('/api/balance/:phone', (req, res) => {
   res.json({balance: user ? user.balance : 0});
 });
 
-const PORT = process.env.PORT || 3000;
+const javascript
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`VeloPay API running on ${PORT}`));
